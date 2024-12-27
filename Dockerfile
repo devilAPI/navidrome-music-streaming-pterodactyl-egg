@@ -17,5 +17,6 @@ WORKDIR /data
 # Switch to the created non-root user
 USER navidrome
 
+ENV ND_DATABASE_URL "sqlite3:///data/config/navidrome.db"
 # Start Navidrome as the non-root user
 #CMD ["./navidrome"]
