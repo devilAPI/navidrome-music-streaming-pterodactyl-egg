@@ -28,4 +28,4 @@ ENV ND_PORT=${ND_PORT}
 
 
 # Expose port (optional, in case you need to expose a port)
-EXPOSE 4533
+EXPOSE ${ND_PORT}
