@@ -8,18 +8,19 @@ RUN apk add --no-cache shadow
 # Create a user and group for Navidrome
 RUN groupadd -g 1000 navidrome && useradd -u 1000 -g navidrome -m -s /bin/bash navidrome
 
-# Create necessary directories and give proper permissions
-RUN mkdir -p /data/cache /data/music /data/config && \
-    chown -R navidrome:navidrome /data
+# Verify host user with UID 1000 and GID 1000 exists, and set ownership
+ARG HOST_DATA_DIR=/home/username/navidrome/data
+RUN mkdir -p ${HOST_DATA_DIR}/cache ${HOST_DATA_DIR}/music ${HOST_DATA_DIR}/config && \
+    chown -R navidrome:navidrome ${HOST_DATA_DIR}
 
 # Set working directory
-WORKDIR /data
+WORKDIR ${HOST_DATA_DIR}
 
 # Set environment variables for database configuration
-ENV ND_DATABASE_URL="sqlite3:///home/container/navidrome.db"
+ENV ND_DATABASE_URL="sqlite3://${HOST_DATA_DIR}/navidrome.db"
 
 # Switch to the created non-root user
 USER navidrome
 
 # Start Navidrome as the non-root user
-#CMD ["navidrome"]
+CMD ["navidrome"]
