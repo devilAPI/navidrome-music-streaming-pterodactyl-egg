@@ -9,14 +9,17 @@ RUN apk add --no-cache shadow
 RUN groupadd -g 1000 navidrome && useradd -u 1000 -g navidrome -m -s /bin/bash navidrome
 
 # Create necessary directories and give proper permissions
-RUN mkdir -p /data/cache /data/music /data/config && chown -R navidrome:navidrome /data
+RUN mkdir -p /data/cache /data/music /data/config && \
+    chown -R navidrome:navidrome /data
 
 # Set working directory
 WORKDIR /data
 
+# Set environment variables for database configuration
+ENV ND_DATABASE_URL="sqlite3:///data/config/navidrome.db"
+
 # Switch to the created non-root user
 USER navidrome
 
-#ENV ND_DATABASE_URL "sqlite3:///app/navidrome.db"
 # Start Navidrome as the non-root user
-#CMD ["./navidrome"]
+#CMD ["navidrome"]
