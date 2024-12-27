@@ -12,6 +12,3 @@ RUN chmod +x /home/container/start.sh
 
 # Expose the default Navidrome port
 EXPOSE 4533
-
-# Set the default command to run the start.sh script
-CMD ["/home/container/start.sh"]
