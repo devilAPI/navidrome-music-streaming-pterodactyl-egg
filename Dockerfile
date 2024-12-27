@@ -1,8 +1,8 @@
 # Use Navidrome as the base image
 FROM deluan/navidrome:latest
 
-# Install the necessary package to create a user
-RUN apt-get update && apt-get install -y passwd
+# Install necessary package to create a user (for Alpine, use apk)
+RUN apk update && apk add --no-cache shadow
 
 # Create a non-root user
 RUN useradd -ms /bin/bash navidromeuser
