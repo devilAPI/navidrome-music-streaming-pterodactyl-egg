@@ -1,15 +1,21 @@
 # Use Navidrome as the base image
 FROM deluan/navidrome:latest
 
+# Create a non-root user
+RUN useradd -ms /bin/bash navidromeuser
+
 # Set the working directory
 WORKDIR /home/container
+
+# Create cache and data directories and set permissions for the user
+RUN mkdir -p /home/container/cache /home/container/data /home/container/music \
+    && chown -R navidromeuser:navidromeuser /home/container
 
 # Expose the default Navidrome port
 EXPOSE 4533
 
-# Remove any default entrypoint (optional)
-# ENTRYPOINT []
+# Set the user for running the container
+USER navidromeuser
 
 # Set the default command to run Navidrome with arguments (this will be overridden in Pterodactyl)
-#CMD ["navidrome --max-memory {{SERVER_MEMORY}} -port {{SERVER_PORT}} --music /home/container/music --cache /home/container/cache --data /home/container/data"]
-#CMD ["navidrome --help"]
+CMD ["navidrome", "--max-memory", "{{SERVER_MEMORY}}", "-port", "{{SERVER_PORT}}", "--music", "/home/container/music", "--cache", "/home/container/cache", "--data", "/home/container/data"]
