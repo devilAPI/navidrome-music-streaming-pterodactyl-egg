@@ -12,4 +12,4 @@ EXPOSE 4533
 
 # Set the default command to run Navidrome with arguments (this will be overridden in Pterodactyl)
 #CMD ["navidrome --max-memory {{SERVER_MEMORY}} -port {{SERVER_PORT}} --music /home/container/music --cache /home/container/cache --data /home/container/data"]
-CMD ["navidrome --help"]
+#CMD ["navidrome --help"]
