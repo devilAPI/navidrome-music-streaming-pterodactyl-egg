@@ -21,6 +21,3 @@ ENV ND_DATABASE_URL="sqlite3://${HOST_DATA_DIR}/navidrome.db"
 
 # Switch to the created non-root user
 USER navidrome
-
-# Start Navidrome as the non-root user
-#CMD ["navidrome"]
