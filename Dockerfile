@@ -4,11 +4,11 @@ FROM deluan/navidrome:latest
 # Set the working directory
 WORKDIR /home/container
 
-# Copy the custom start.sh script to the container
-COPY start.sh /home/container/start.sh
-
-# Set permissions for the start.sh script
-RUN chmod +x /home/container/start.sh
-
 # Expose the default Navidrome port
 EXPOSE 4533
+
+# Remove any default entrypoint (optional)
+# ENTRYPOINT []
+
+# Set the default command to run Navidrome with arguments (this will be overridden in Pterodactyl)
+CMD ["navidrome -max-memory {{SERVER_MEMORY}} -port {{SERVER_PORT}} --music /home/container/music --cache /home/container/cache --data /home/container/data"]
