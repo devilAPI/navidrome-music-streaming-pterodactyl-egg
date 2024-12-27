@@ -16,7 +16,7 @@ RUN mkdir -p /data/cache /data/music /data/config && \
 WORKDIR /data
 
 # Set environment variables for database configuration
-ENV ND_DATABASE_URL="sqlite3:///data/config/navidrome.db"
+ENV ND_DATABASE_URL="sqlite3:///home/container/navidrome.db"
 
 # Switch to the created non-root user
 USER navidrome
