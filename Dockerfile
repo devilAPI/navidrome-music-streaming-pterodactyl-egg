@@ -12,6 +12,3 @@ WORKDIR /data
 
 # Switch to the created non-root user
 USER navidrome
-
-# Start Navidrome as the non-root user
-CMD ["./navidrome"]
