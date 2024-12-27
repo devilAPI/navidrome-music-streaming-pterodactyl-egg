@@ -8,8 +8,10 @@ RUN apk add --no-cache shadow
 # Create a user and group for Navidrome
 RUN groupadd -g 1000 navidrome && useradd -u 1000 -g navidrome -m -s /bin/bash navidrome
 
-# Verify host user with UID 1000 and GID 1000 exists, and set ownership
+# Set environment variable for host data directory
 ARG HOST_DATA_DIR=/home/navidrome/navidrome/data
+
+# Create necessary directories and set ownership
 RUN mkdir -p ${HOST_DATA_DIR}/cache ${HOST_DATA_DIR}/music ${HOST_DATA_DIR}/config && \
     chown -R navidrome:navidrome ${HOST_DATA_DIR}
 
@@ -21,3 +23,6 @@ ENV ND_DATABASE_URL="sqlite3://${HOST_DATA_DIR}/navidrome.db"
 
 # Switch to the created non-root user
 USER navidrome
+
+# Expose port (optional, in case you need to expose a port)
+EXPOSE 4533
