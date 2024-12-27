@@ -1,0 +1,33 @@
+stages:
+  - build
+  - push
+
+variables:
+  # Define the Docker image name and tag
+  DOCKER_IMAGE_NAME: my-navidrome
+  DOCKER_TAG: latest
+  # Set the Docker registry URL if using a private registry (adjust as needed)
+  DOCKER_REGISTRY_URL: docker.io
+
+# Stage 1: Build the Docker image
+build_image:
+  stage: build
+  script:
+    # Log in to Docker registry if using private Docker registry (uncomment if needed)
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY_URL
+
+    # Build the Docker image
+    - docker build -t $DOCKER_IMAGE_NAME:$DOCKER_TAG .
+
+    # Check the built image
+    - docker images
+
+# Stage 2: Push the Docker image (optional)
+push_image:
+  stage: push
+  script:
+    # Tag and push the Docker image to a registry
+    - docker tag $DOCKER_IMAGE_NAME:$DOCKER_TAG $CI_REGISTRY/$DOCKER_IMAGE_NAME:$DOCKER_TAG
+    - docker push $CI_REGISTRY/$DOCKER_IMAGE_NAME:$DOCKER_TAG
+  only:
+    - main  # Adjust to your branch name if necessary
