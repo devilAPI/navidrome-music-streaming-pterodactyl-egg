@@ -1,10 +1,17 @@
+# Use Navidrome as the base image
 FROM deluan/navidrome:latest
+
+# Set the working directory
+WORKDIR /home/container
 
 # Copy the custom start.sh script to the container
 COPY start.sh /home/container/start.sh
 
-# Set permissions to allow user access
-RUN chmod +x /home/container/start.sh && chown container:container /home/container/start.sh
+# Set permissions for the start.sh script
+RUN chmod +x /home/container/start.sh
 
-# Set the entrypoint to use the custom start.sh
-ENTRYPOINT ["/home/container/start.sh"]
+# Expose the default Navidrome port
+EXPOSE 4533
+
+# Set the default command to run the start.sh script
+CMD ["/bin/bash", "/home/container/start.sh"]
