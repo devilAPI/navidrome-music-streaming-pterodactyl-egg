@@ -1,2 +1,6 @@
-# navidrome-pterodactyl-egg
+# Navidrome Egg for Pterodactyl
 A music Streaming Service as an Pterodactyl Egg
+
+You can download the egg [here](https://github.com/devilAPI/navidrome-pterodactyl-egg/blob/main/egg-navidrome.json).
+
+Just import it into Pterodactyl, change the "Port" value on the "Startup" page and you're good to go!
