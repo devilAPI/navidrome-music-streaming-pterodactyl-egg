@@ -14,4 +14,4 @@ RUN chmod +x /home/container/start.sh
 EXPOSE 4533
 
 # Set the default command to run the start.sh script
-CMD ["/bin/bash", "/home/container/start.sh"]
+CMD ["/home/container/start.sh"]
